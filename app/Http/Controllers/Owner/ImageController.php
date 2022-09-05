@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Requests\UploadImageRequest;
 
 class ImageController extends Controller
 {
@@ -31,11 +31,21 @@ class ImageController extends Controller
     public function index()
     {
         $images = Image::where('owner_id', Auth::id())
-        ->orderBy('updated_at', 'desc')
-        ->paginate(20);
+            ->orderBy('updated_at', 'desc')
+            ->paginate(20);
 
         return view('owner.images.index', compact('images'));
     }
+
+
+    public function create()
+    {
+        return view('owner.images.create');
     }
 
+    public function store(UploadImageRequest $request)
+    {
+        dd($request);
 
+    }
+}
