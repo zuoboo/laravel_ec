@@ -10,8 +10,10 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                    <x-flash-message status="session('status')" />
                     <form method="post" action="{{ route('owner.products.update', ['product' => $product->id]) }}">
                         @csrf
+                        @method('put')
                         <div class="-m-2">
                             <div class="p-2 w-1/2 mx-auto">
                                 <div class="relative">
@@ -25,7 +27,7 @@
                                 <div class="relative">
                                     <label for="information" class="leading-7 text-sm text-gray-600">商品情報 ※必須</label>
                                     <textarea id="information" name="information" rows="10" required
-                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">"{{ $product->information }}"</textarea>
+                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{ $product->information }}</textarea>
                                 </div>
                             </div>
                             <div class="p-2 w-1/2 mx-auto">
@@ -54,7 +56,7 @@
                             </div>
                                 <div class="p-2 w-1/2 mx-auto">
                                     <div class="relative flex justify-around">
-                                        <div><input type="radio" name="type value="1" class="mr-2" checked>追加</div>
+                                        <div><input type="radio" name="type" value="1" class="mr-2" checked>追加</div>
                                         <div><input type="radio" name="type" value="2" class="mr-2">削減</div>
                                     </div>
                                 </div>
@@ -102,13 +104,13 @@
                             <x-select-image :images="$images" currentId="{{ $product->image1 }}"
                                 currentImage="{{ $product->imageFirst->filename ?? '' }}" name="image1" />
                             <x-select-image :images="$images" currentId="{{ $product->image2 }}"
-                                currentImage="{{ $product->imageSecond->filename ?? '' }}" name="image1" />
+                                currentImage="{{ $product->imageSecond->filename ?? '' }}" name="image2" />
 
                             <x-select-image :images="$images" currentId="{{ $product->image3 }}"
-                                currentImage="{{ $product->imageThird->filename ?? '' }}" name="image1" />
+                                currentImage="{{ $product->imageThird->filename ?? '' }}" name="image3" />
 
                             <x-select-image :images="$images" currentId="{{ $product->image4 }}"
-                                currentImage="{{ $product->imageFourth->filename ?? '' }}" name="image1" />
+                                currentImage="{{ $product->imageFourth->filename ?? '' }}" name="image4" />
 
                             <div class="p-2 w-1/2 mx-auto">
                                 <div class="relative flex justify-around">
