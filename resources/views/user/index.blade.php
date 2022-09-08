@@ -12,7 +12,7 @@
                     <div class="flex flex-wrap">
                         @foreach ($products as $product)
                             <div class="w-1/4 p-2 md:p-4">
-                                <a href="">
+                                <a href="{{route('user.items.show', ['item' => $product->id ])}}">
                                     <div class="border rounded-md p-2 md:p-4">
                                         <x-thumbnail filename="{{ $product->filename ?? '' }}"
                                             type="product" />
@@ -20,8 +20,8 @@
                                             <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">
                                                 {{ $product->category }}</h3>
                                             <h2 class="text-gray-900 title-font text-lg font-medium">
-                                                {{ $product->name }}</h2>
-                                            <p class="mt-1">{{ number_format($product->price) }}<span class="text-sm text-gray-700">円(税込)</span></p>
+                                                {{ $product->name }}</h2><span class="text-sm text-gray-700">円(税込)</span>
+                                            <p class="mt-1">{{ number_format($product->price) }}</p>
                                         </div>
                                     </div>
                                 </a>
