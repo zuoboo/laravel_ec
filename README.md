@@ -13,3 +13,6 @@ storage/app/public/productフォルダ内に
 保存すると表示されます。
 （productフォルダがない場合は作成してください。）
 
+ショップの画像も表示する場合は、
+storage/app/public/shopsフォルダを作成し
+画像を保存してください。
