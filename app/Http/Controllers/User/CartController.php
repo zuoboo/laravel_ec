@@ -17,8 +17,7 @@ class CartController extends Controller
         $products = $user->products;
         $totalPrice = 0;
 
-        foreach($products as $product)
-        {
+        foreach ($products as $product) {
             $totalPrice += $product->price * $product->pivot->quantity;
         }
 
@@ -31,12 +30,11 @@ class CartController extends Controller
     public function add(Request $request)
     {
         $itemInCart = Cart::where('product_id', $request->product_id)
-        ->where('user_id', Auth::id())->first();
+            ->where('user_id', Auth::id())->first();
 
-        if($itemInCart){
+        if ($itemInCart) {
             $itemInCart->quantity += $request->quantity;
             $itemInCart->save();
-
         } else {
             Cart::create([
                 'user_id' => Auth::id(),
@@ -50,8 +48,8 @@ class CartController extends Controller
     public function delete($id)
     {
         Cart::where('product_id', $id)
-        ->where('user_id', Auth::id())
-        ->delete();
+            ->where('user_id', Auth::id())
+            ->delete();
 
         return redirect()->route('user.cart.index');
     }
@@ -62,32 +60,41 @@ class CartController extends Controller
         $products = $user->products;
 
         $lineItems = [];
-        foreach($products as $product)
-        {
+        foreach ($products as $product) {
             $quantity = '';
             $quantity = Stock::where('product_id', $product->id)->sum('quantity');
-            if($product->pivot->quantity > $quantity ){
+            if ($product->pivot->quantity > $quantity) {
                 return redirect()->route('user.cart.index', compact('quantity'));
             } else {
                 $lineItem = [
-                    'name' => $product->name,
-                    'description' => $product->information,
-                    'amount' => $product->price,
-                    'currency' => 'jpy',
-                    'quantity' => $product->pivot->quantity,
+                    'price_data' => [
+                        'currency' => 'jpy',
+                        'unit_amount' => $product->price,
+                        'product_data' => [
+                            'name' => $product->name,
+                            'description' => $product->information,
+                        ],
+                    ],
+                    'quantity' => $product->pivot->quantity
                 ];
+
+                // $lineItem = [
+                //     'name' => $product->name,
+                //     'description' => $product->information,
+                //     'amount' => $product->price,
+                //     'currency' => 'jpy',
+                //     'quantity' => $product->pivot->quantity,
+                // ];
                 array_push($lineItems, $lineItem);
             }
-
         }
         // dd($lineItems);
-        foreach($products as $product){
+        foreach ($products as $product) {
             Stock::create([
                 'product_id' => $product->id,
                 'type' => \Constant::PRODUCT_LIST['reduce'],
                 'quantity' => $product->pivot->quantity * -1
             ]);
-            dd('test');
         }
 
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
@@ -104,5 +111,4 @@ class CartController extends Controller
 
         return view('user.checkout', compact('session', 'publicKey'));
     }
-
 }
