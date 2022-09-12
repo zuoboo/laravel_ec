@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,7 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // ownerから始まるURL
+        Schema::defaultStringLength(191);
+        // ownerから始まるURL   
         if (request()->is('owner*')) {
             config(['session.cookie' => config('session.cookie_owner')]);
         }
