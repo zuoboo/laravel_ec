@@ -7,15 +7,17 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class TestMail extends Mailable
+class ThanksMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $products;
+    public $user;
 
-
-    public function __construct()
+    public function __construct($products, $user)
     {
-
+        $this->products = $products;
+        $this->user = $user;
     }
 
     /**
@@ -25,7 +27,6 @@ class TestMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('テスト送信完了')
-        ->view('emails.test');
+        return $this->view('emails.thanks')->subject('ご購入ありがとうございます。');
     }
 }
