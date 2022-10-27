@@ -52,6 +52,20 @@
                     {{ __('Log in') }}
                 </x-button>
             </div>
+            <div>
+                このサイトはマルチログイン機能を搭載しています。<br>
+                ユーザー側<br>
+                Email: test@test.com<br>
+                password: password123<br>
+                <a class="text-blue-600 hover:underline" href="/owner/login">オーナー側</a><br>
+                Email: test1@test.com<br>
+                password: password123<br>
+                <a class="text-blue-600 hover:underline" href="/admin/login">管理者側</a><br>
+                Email: test@test.com<br>
+                password: password123<br>
+
+                上記でログインをお願いします。
+            </div>
         </form>
     </x-auth-card>
 </x-guest-layout>
