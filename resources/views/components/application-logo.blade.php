@@ -1,1 +1,1 @@
-<img src="{{ asset('images/logo.png') }}" alt="">
+<img src="{{ asset('images/reboot.png') }}" alt="">
