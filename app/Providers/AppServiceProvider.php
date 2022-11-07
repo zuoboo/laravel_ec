@@ -24,8 +24,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if(\App::environment(['production'])) {
+            \URL::forceScheme('https');
+        }
+
         Schema::defaultStringLength(191);
-        // ownerから始まるURL   
+        // ownerから始まるURL
         if (request()->is('owner*')) {
             config(['session.cookie' => config('session.cookie_owner')]);
         }
