@@ -3,6 +3,7 @@
         $path = 'storage/shops/';
     }
     if($type === 'product'){
+        // $path = 'storage/product/';
         $path = 'storage/product/';
     }
 @endphp
