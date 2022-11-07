@@ -1,10 +1,10 @@
 
 ## ダウンロード方法
 git clone 
-git clone https://github.com/zuoboo/laravel_umarche
+git clone https://github.com/zuoboo/laravel_ec
 
 git clone ブランチを指定してダウンロードする場合
-git clone -b ブランチ名 https://github.com/zuoboo/laravel_umarche
+git clone -b ブランチ名 https://github.com/zuoboo/laravel_ec
 
 もしくはzipファイルでダウンロードしてください
 
