@@ -10,7 +10,7 @@ git clone -b ブランチ名 https://github.com/zuoboo/laravel_ec
 
 ## インストール方法
 
-- cd laravel_umarche
+- cd laravel_ec
 - composer install
 - npm install
 - npm run dev
@@ -22,8 +22,8 @@ git clone -b ブランチ名 https://github.com/zuoboo/laravel_ec
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=laravel_umarche
-DB_USERNAME=umarche
+DB_DATABASE=laravel_ec
+DB_USERNAME=ec
 DB_PASSWORD=password123
 
 XAMPP/MAMPまたは他の開発環境でDBを起動した後に
